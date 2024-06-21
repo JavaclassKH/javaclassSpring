@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 대신 DAO를 관리하는 Interface의 경로와 이름을 준다 -->
+<mapper namespace="com.spring.javaclassS.dao.DbtestDAO">
+<!-- select -->
+	<select id="getDbtestList" resultType="com.spring.javaclassS.vo.UserVO">
+		select * from user order by idx desc;
+	</select>
+	
+	<select id="getDbtestSearch" resultType="com.spring.javaclassS.vo.UserVO">
+		select * from user where mid like concat('%',#{mid},'%');
+	</select>	  
+	
+	<select id="getDbtestIdCheck" resultType="com.spring.javaclassS.vo.UserVO">
+		select * from user where mid = #{mid};
+	</select>
+	
+	<select id="getMemberNameList" resultType="com.spring.javaclassS.vo.UserVO">
+		select * from user order by name;
+	</select>
+	
+	<select id="getMemberAge" resultType="int">
+		select age from user where name = #{name};
+	</select>
+	
+	<select id="getMemberInfosName">
+		select * from user where name = #{name};		
+	</select>
+	
+	<select id="getMemberInfosAge">
+		select * from user where age = #{age};		
+	</select>
+	
+	<select id="getMemberInfosAddress">
+		select * from user where address = #{address};		
+	</select>
+	
+<!-- delete -->	
+	<delete id="setDbtestDelete">
+		delete from user where idx = #{idx}; 
+	</delete>
+	
+<!-- insert -->	
+	<insert id="setDbtestInputOk">
+		insert into user values (default,#{vo.mid},#{vo.name},#{vo.age},#{vo.address});
+	</insert>
+	
+	
+<!-- update -->	
+	<update id="setdbtestUpdateOk">
+		update user set mid = #{vo.mid}, name = #{vo.name}, age = #{vo.age}, address = #{vo.address} where idx = #{vo.idx};
+	</update>		  
+		  
+</mapper>
+
+
+
+<!-- 
+작업 시 항상 이 순서대로 열어두고 진행할 것
+컨트롤러 -> 서비스인터페이스 -> 서비스구현객체 -> DAO인터페이스 -> Mapper
+
+ -->

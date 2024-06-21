@@ -1,0 +1,45 @@
+create table user (
+	idx int not null auto_increment,
+	mid varchar(30) not null,
+	name varchar(30) not null,
+	age int default 20,
+	address varchar(15) default '서울',
+	primary key(idx)
+);
+
+insert into user values (default,'admin','관리자',27,'청주');
+insert into user values (default,'sona123','운영자',32,default);
+insert into user values (default,'hkd1234','홍길동',default,default);
+insert into user values (default,'kms1234','김말숙',default,'인천');
+insert into user values (default,'lkj1234','이기자',25,default);
+
+desc user;
+select * from user;
+
+select year,sum(robbery) as totRobbery,sum(murder) as totMurder,sum(theft) 
+as totTheft,sum(violence) as totViolence,
+avg(robbery) as avgRobbery,avg(murder) as avgMurder,avg(theft) 
+as avgTheft,avg(violence) as avgViolence
+from crime where year = 2022 and police like '서울%';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
