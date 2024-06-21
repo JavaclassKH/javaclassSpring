@@ -27,6 +27,10 @@
 		    let tel3 = myform.tel3.value.trim();
 		    let tel = tel1 + "-" + tel2 + "-" + tel3;
 		    
+		    
+		    
+		    
+		    /*
 				 // 전송전에 파일에 관련된 사항들을 체크해준다.
 					let fName = document.getElementById("file").value;
 					if(fName.trim() != "") {
@@ -43,8 +47,12 @@
 							return false;
 						}
 					}
-					else return false;			
+					else return false;		
+				*/
 		    
+				
+				
+				
 		    let postcode = myform.postcode.value + " ";   
 		    let roadAddress = myform.roadAddress.value + " ";   
 		    let detailAddress = myform.detailAddress.value + " ";   
@@ -98,7 +106,7 @@
     	}
     	else{
 	    	$.ajax({
-					url : "${ctp}/MemberIdCheck.mem",
+					url : "${ctp}/member/memberIdCheck",
 					type : "get",
 					data : { mid : mid },
 					success : function(res) {
@@ -128,7 +136,7 @@
     	}
     	else{
 	    	$.ajax({
-					url : "${ctp}/MemberIdCheck.mem",
+					url : "${ctp}/member/memberNickCheck",
 					type : "get",
 					data : { nickName : nickName },
 					success : function(res) {
@@ -155,7 +163,8 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-  <form name="myform" method="post" action="${ctp}/MemberJoinOk.mem" class="was-validated" enctype="multipart/form-data">
+<!--   <form name="myform" method="post" class="was-validated" enctype="multipart/form-data"> -->
+  <form name="myform" method="post" class="was-validated">
     <h2>회 원 가 입</h2>
     <br/>
     <div class="form-group">
@@ -232,14 +241,14 @@
     </div>
     <div class="form-group">
       <label for="address">주소</label>
-      <div class="input-group mb-1">
+      <div class="input-group mb-2">
         <input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" class="form-control">
         <div class="input-group-append">
           <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary">
         </div>
       </div>
       <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
-      <div class="input-group mb-1">
+      <div class="input-group mb-2">
         <input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
         <div class="input-group-append">
           <input type="text" name="extraAddress" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
@@ -248,20 +257,20 @@
     </div>
     <div class="form-group">
       <label for="homepage">Homepage address:</label>
-      <input type="text" class="form-control" name="homePage" value="http://" placeholder="홈페이지를 입력하세요." id="homePage"/>
+      <input type="text" class="form-control" name="homePage" value="https://" placeholder="홈페이지를 입력하세요." id="homePage" />
     </div>
     <div class="form-group">
       <label for="name">직업</label>
       <select class="form-control" id="job" name="job">
         <!-- <option value="">직업선택</option> -->
-        <option>학생</option>
-        <option>회사원</option>
-        <option>공무원</option>
-        <option>군인</option>
-        <option>의사</option>
-        <option>법조인</option>
-        <option>세무인</option>
-        <option>자영업</option>
+        <option>카지노환전상</option>
+        <option>가상화폐투자자</option>
+        <option>살인청부업자</option>
+        <option>전문사기설계자</option>
+        <option>조직폭력배</option>
+        <option>마약판매상</option>
+        <option>자동차딜러</option>
+        <option>휴대폰판매자</option>
         <option selected>기타</option>
       </select>
     </div>
@@ -331,7 +340,7 @@
     </div>
     <button type="button" class="btn btn-success mr-3" onclick="fCheck()">회원가입</button> &nbsp;&nbsp;&nbsp;
     <button type="reset" class="btn btn-warning mr-3">다시작성</button> &nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-danger" onclick="location.href='${ctp}/MemberLogin.mem';">돌아가기</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='${ctp}/member/memberLogin';">로그인</button>
     
     <input type="hidden" name="email" />
     <input type="hidden" name="tel" />

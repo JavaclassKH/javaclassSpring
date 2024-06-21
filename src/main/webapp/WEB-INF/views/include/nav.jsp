@@ -22,6 +22,8 @@
         <a href="${ctp}/study/mail/mailForm" class="w3-bar-item w3-button">Mail</a>
       </div>
     </div>
+    <a href="${ctp}/member/memberLogin" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Login</a>
+    <a href="${ctp}/member/memberJoin" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Join</a>
     <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 </div>
