@@ -53,17 +53,17 @@ pageContext.setAttribute("nl", "\n");
 				<!-- <td><a href="" class="btn btn-info">관리자전용</a></td> -->
 				<td class="text-right">
 				</td>
-				<td><input type="button" onclick="w3school()" value="글쓰기" class="btn btn-danger" /></td>
-				<td><a href="${ctp}/guest/guestInput" class="btn btn-outline-success"><font color="red">경고: 누르지마시오</font></a></td>
+				<td><input type="button" onclick="w3school()" value="write" class="btn btn-danger" /></td>
+				<td><a href="${ctp}/guest/guestInput" class="btn btn-outline-success"><font color="red">warning: do not click!</font></a></td>
 				<td class="text-right"> 
-				<span class="mr-15">현재 페이지 : ${pag} / 다음 페이지 :  ${totPage}</span>
+				<span class="mr-15">This Page : ${pag} / Next page :  ${totPage}</span>
 				<c:if test="${pag > 1}"> 
-					<a href="${ctp}/guest/guestList?pag=1" class="btn btn-info btn-sm"><span class="spinner-border spinner-border-sm"></span>첫 페이지</a>
-					<a href="${ctp}/guest/guestList?pag=${pag - 1}" class="btn btn-outline-info ml-4 mr-1">앞</a>
+					<a href="${ctp}/guest/guestList?pag=1" class="btn btn-info btn-sm"><span class="spinner-border spinner-border-sm"></span>First Page</a>
+					<a href="${ctp}/guest/guestList?pag=${pag - 1}" class="btn btn-outline-info ml-4 mr-1">front</a>
 				</c:if>
 				<c:if test="${pag < totPage}">
-					<a href="${ctp}/guest/guestList?pag=${pag + 1}"  class="btn btn-outline-info ml-1 mr-4">뒤</a>	
-					<a href="${ctp}/guest/guestList?pag=${totPage}" class="btn btn-info btn-sm"><span class="spinner-border spinner-border-sm"></span>끝 페이지</a>	
+					<a href="${ctp}/guest/guestList?pag=${pag + 1}"  class="btn btn-outline-info ml-1 mr-4">behind</a>	
+					<a href="${ctp}/guest/guestList?pag=${totPage}" class="btn btn-info btn-sm"><span class="spinner-border spinner-border-sm"></span>Last page</a>	
 				</c:if>
 				</td>
 				<tr>
@@ -87,10 +87,10 @@ pageContext.setAttribute("nl", "\n");
 						<a href="javascript:delCheck(${vo.idx})" class="btn btn-outline-danger ml-2">사악제에</a>
 					</c:if>			
 					</th>									
-						<td class="text-right row-2 pr-5"><b><font color="darkred">작성자ip : ${vo.hostIp}</font></b></td>	
+						<td class="text-right row-2 pr-5"><b><font color="darkred">writerip : ${vo.hostIp}</font></b></td>	
 				</tr> 
 				<tr>
-					<th class="table-primary">성명</th>
+					<th class="table-primary">name</th>
 					<td>
 			 		<c:if test="${vo.hostIp == '192.168.50.20'}">선생님 : ${vo.name}</c:if>
 					<c:if test="${vo.hostIp == '192.168.50.51'}">이수연 : ${vo.name}</c:if>
@@ -120,11 +120,11 @@ pageContext.setAttribute("nl", "\n");
 					</td>
 					</tr>
 					<tr>
-					<th class="table-success">방문일자</th>
+					<th class="table-success">visitDate</th>
 					<td>${fn:substring(vo.visitDate, 0, 19)}</td>
 				</tr>
 				<tr>
-					<th class="table-secondary">메일주소</th>
+					<th class="table-secondary">email Address</th>
 					<td colspan="3">
 						<%-- <c:if test="${vo.email == '' || vo.email == null}">없음</c:if> 
 						 <c:if test="${vo.email != '' && vo.email != null}">${vo.email}</c:if> --%>
@@ -133,14 +133,14 @@ pageContext.setAttribute("nl", "\n");
 					</td>
 				</tr>
 				<tr>
-					<th class="table-warning">페이지링크</th>
+					<th class="table-warning">link</th>
 					<td colspan="3">
 						<c:if test="${empty vo.homePage || fn:length(vo.homePage) < 10 || fn:indexOf(vo.homePage, '.') == -1}">없음</c:if>
 						<c:if test="${!empty vo.homePage && fn:length(vo.homePage) >= 10 && fn:indexOf(vo.homePage, '.') != -1}"><a href="${vo.homePage}" target="_blank">${vo.homePage}</a></c:if>
 					</td>
 				</tr>
 				<tr>
-					<th class="table-danger">방문소감</th>
+					<th class="table-danger">visit Impression</th>
 					<td colspan="3">${fn:replace(vo.content, nl ,"<br/>")}</td>
 				</tr>
 			</table>		

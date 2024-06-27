@@ -1,7 +1,9 @@
 package com.spring.javaclassS.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.spring.javaclassS.service.DbtestService;
 import com.spring.javaclassS.service.StudyService;
@@ -185,46 +190,46 @@ public class StudyController {
 		return "study/mail/mailForm";
 	}
 	
-	// ¸ŞÀÏ Àü¼ÛÇÏ±â
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	@RequestMapping(value = "/mail/mailForm", method = RequestMethod.POST)
 	public String mailformPost(MailVO vo, HttpServletRequest request) throws MessagingException {
 		String toMail = vo.getToMail();
 		String title = vo.getTitle();
 		String content = vo.getContent();
 		
-		// ¸ŞÀÏÀü¼ÛÀ» À§ÇÑ °´Ã¼ 2°¡Áö : MimeMessage() , MimeMessageHelper();
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ 2ï¿½ï¿½ï¿½ï¿½ : MimeMessage() , MimeMessageHelper();
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 		
-		// ¸ŞÀÏ º¸°üÇÔ¿¡ ÀÛ¼ºÇÑ ¸Ş½ÃÁöµéÀÇ Á¤º¸¸¦ ¸ğµÎ ÀúÀå½ÃÅ² ÈÄ ÀÛ¾÷ÇÏ±â
-		messageHelper.setTo(toMail);       // ¹Ş´Â »ç¶÷ ¸ŞÀÏÁÖ¼Ò
-		messageHelper.setSubject(title);   // ¸ŞÀÏ Á¦¸ñ
-		messageHelper.setText(content);    // ¸ŞÀÏ ³»¿ë
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ş½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å² ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½Ï±ï¿½
+		messageHelper.setTo(toMail);       // ï¿½Ş´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
+		messageHelper.setSubject(title);   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		messageHelper.setText(content);    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
-		// º¸°üÇÔÀÇ ³»¿ë(content)¿¡ ¹ß½ÅÀÚÀÇ ÇÊ¿äÇÑ Á¤º¸¸¦ Ãß·Î ´ã¾Æ¼­ Àü¼ÛÃ³¸®ÇÑ´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(content)ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß·ï¿½ ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½Ñ´ï¿½
 		content = content.replace("\n", "<br>");
 		content += "<br><hr/><h3>Send to you from javaclass</h3>";
 		content += "<p><img src=\"cid:Main.png\" width='1200px'></p>";
-		content += "<p>¹æ ¹® ÇÏ ±â : <a href='http://49.142.157.251:9090/javaclassJ11/Lobby'>javaclass</a></p>";
+		content += "<p>ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ : <a href='http://49.142.157.251:9090/javaclassJ11/Lobby'>javaclass</a></p>";
 		content += "<hr>";
-		content += "<strong>³¡</strong>";
+		content += "<strong>ï¿½ï¿½</strong>";
 		messageHelper.setText(content, true);
 		
-		// ¸ŞÀÏ¿¡ Ã·ºÎÇÒ ±×¸²ÆÄÀÏ °æ·Î¸¦ º°µµ·Î Ç¥½ÃÇÑ µÚ ´Ù½Ã º¸°üÇÔ¿¡ ÀúÀå!
+		// ï¿½ï¿½ï¿½Ï¿ï¿½ Ã·ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½!
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/Main.png");
 		FileSystemResource fi = new FileSystemResource(path);
 		messageHelper.addInline("Main.png", fi);	
 		
-		// Ã·ºÎÆÄÀÏ º¸³»±â
+		// Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//fi = new FileSystemResource(request.getSession().getServletContext().getRealPath("/resources/images/paris.jpg"));
 		//messageHelper.addAttachment("paris.jpg", fi);
 		
-		// ¾ĞÃàÆÄÀÏ º¸³»±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//fi = new FileSystemResource(request.getSession().getServletContext().getRealPath("/resources/images/citys.zip"));
 		//messageHelper.addAttachment("citys.zip", fi);
 		
-		// ¸ŞÀÏ Àü¼ÛÇÏ±â
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		mailSender.send(message);		
 		
 		
@@ -232,12 +237,105 @@ public class StudyController {
 		return "redirect:/message/mailSendOk";
 	}
 	
+	// íŒŒì¼ ì—…ë¡œë“œ ì—°ìŠµ
+	@RequestMapping(value = "/fileUpload/fileUpload", method = RequestMethod.GET)
+	public String fileUploadGet(Model model, HttpServletRequest request) {
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/fileUpload");
+		
+		String[] files = new File(realPath).list();
+		
+		model.addAttribute("files", files);
+		model.addAttribute("fileCount", files.length);
+		
+		return "study/fileUpload/fileUpload";
+	}
+	
+	// íŒŒì¼ ì—…ë¡œë“œ ì—°ìŠµ
+	@RequestMapping(value = "/fileUpload/fileUpload", method = RequestMethod.POST)
+	public String fileUploadPost(MultipartFile fName, String mid) {
+		int res = studyService.fileUpload(fName, mid);
+		
+		if(res != 0) return "redirect:/message/fileUploadOk";			
+		else return "redirect:/message/fileUploadNo";			
+		
+	}
+	
+	// íŒŒì¼ ê°œë³„ì‚­ì œ ì—°ìŠµ
+	@ResponseBody
+	@RequestMapping(value = "/fileUpload/fileDelete", method = RequestMethod.POST)
+	public String fileDeletePost(String file, HttpServletRequest request) {
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/fileUpload/");
+		
+		File fName = new File(realPath + file);
+		String res = "0";
+		if(fName.exists() == true) {
+			fName.delete();
+			res = "1";
+		}		
+		return res;			
+	}
+	
+	
+	// íŒŒì¼ ì „ì²´ì‚­ì œ ì—°ìŠµ
+	@ResponseBody
+	@RequestMapping(value = "/fileUpload/fileDeleteAll", method = RequestMethod.POST)
+	public String fileDeleteAllPost(String file, HttpServletRequest request) {
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/fileUpload");
+		String res = "0";
+		
+		File targetFolder = new File(realPath);
+		
+		if(!targetFolder.exists()) return "0";
+		
+		File[] files = targetFolder.listFiles();
+
+		if(files.length != 0) {
+			for(File f : files) {
+				if(!f.isDirectory()) f.delete();
+			}
+			res = "1";
+		}
+				
+		
+		return res;			
+	}
 	
 	
 	
+	@RequestMapping(value = "/fileUpload/multiFile", method = RequestMethod.GET)
+	public String multiFileGet() { return "study/fileUpload/multiFile"; }
+	
+	// , HttpServletRequest request
 	
 	
+	@RequestMapping(value = "/fileUpload/multiFile", method = RequestMethod.POST)
+	public String multiFilePost(MultipartHttpServletRequest mFile) {
+		
+		int res = studyService.multiFileUpload(mFile);
+		
+		if(res != 0) return "redirect:/message/multiFileUploadOk";
+		else return "redirect:/message/multiFileUploadNo";
+	}
 	
+	
+	@RequestMapping(value = "/fileUpload/multiFile2", method = RequestMethod.GET)
+	public String multiFile2Get() {
+		
+		return "study/fileUpload/multiFile2";
+	}
+	
+	@RequestMapping(value = "/fileUpload/multiFile2", method = RequestMethod.POST)
+	public String multiFile2Post(MultipartHttpServletRequest mFile, HttpServletRequest request, String imgNames) {
+		//String[] imgNames = request.getParameter("imgNames").split("/");
+		
+		int res = studyService.multiFileUpload(mFile);
+		
+		
+		return "study/fileUpload/multiFile"; 
+	}
+	
+	
+
 	
 	
 	

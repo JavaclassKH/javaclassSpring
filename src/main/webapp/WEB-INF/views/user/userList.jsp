@@ -89,42 +89,42 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-	<h2>회 원 리 스 트</h2>
+	<h2>Member List</h2>
 	<hr/>
-	<input type="button" id="btnShow" value="보여" class="btn btn-primary mb-3 mr-2" />
-	<input type="button" id="btnHide" value="가려" class="btn btn-primary mb-3" />
+	<input type="button" id="btnShow" value="show" class="btn btn-primary mb-3 mr-2" />
+	<input type="button" id="btnHide" value="hide" class="btn btn-primary mb-3" />
 	<div class="userInput">
 		<form name="myform" method="post" action="${ctp}/user/userInputOk">
 			<table class="table table-hover">
 				<tr>
-					<th>아이디</th>
+					<th>ID</th>
 					<td>
 						<input type="text" name="mid" value="atom1234" class="form-control" />
 					</td>
 				</tr>
 				<tr>
-					<th>성명</th>
+					<th>name</th>
 					<td>
-						<input type="text" name="name" value="아톰맨" class="form-control" />
+						<input type="text" name="name" value="atomMan" class="form-control" />
 					</td>
 				</tr>
 				<tr>
-					<th>나이</th>
+					<th>age</th>
 					<td>
 						<input type="number" name="age" value="21" class="form-control" />
 					</td>
 				</tr>
 				<tr>
-					<th>주소</th>
+					<th>address</th>
 					<td>
 						<input type="text" name="address" value="청주" class="form-control" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" class="text-center">
-						<input type="submit" value="가입" class="btn btn-success mr-3" />
-						<input type="reset" value="재입력" class="btn btn-warning mr-3" />
-						<input type="button" id="btnUserSearch" value="개별조회" onclick="userSearch()" class="btn btn-info" />
+						<input type="submit" value="join" class="btn btn-success mr-3" />
+						<input type="reset" value="reset" class="btn btn-warning mr-3" />
+						<input type="button" id="btnUserSearch" value="partSearch" onclick="userSearch()" class="btn btn-info" />
 					</td>
 				</tr>
 			</table>
@@ -134,10 +134,10 @@
 	<div class="SearchResult">
 			<table class="table table-hover">
 				<tr>
-					<th>아이디</th>
-					<th>성명</th>
-					<th>나이</th>
-					<th>주소</th>
+					<th>ID</th>
+					<th>name</th>
+					<th>age</th>
+					<th>address</th>
 				</tr>
 				<tr>
 					<td>${vo2.mid}</td>
@@ -150,12 +150,12 @@
 		<br/><br/><br/>
 		<table class="table table-hover">
 			<tr class="table-secondary">
-				<th>번호</th>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>나이</th>
-				<th>주소</th>
-				<th>비고</th>
+				<th>no</th>
+				<th>ID</th>
+				<th>name</th>
+				<th>age</th>
+				<th>address</th>
+				<th>note</th>
 			</tr>
 			<c:forEach var="vo" items="${vos}" varStatus="st">
 				<tr>
@@ -166,14 +166,14 @@
 					<td>${vo.address}</td>
 					<td>
 						<a href="javascript:deleteCheck('${vo.idx}')" class="btn btn-danger btn-sm">Delete</a>
-						<button type="button" class="btn btn-primary btn-sm ml-3" onclick="idxGive('${vo.idx}')" data-toggle="modal" data-target="#myModal">회원정보수정창</button>
+						<button type="button" class="btn btn-primary btn-sm ml-3" onclick="idxGive('${vo.idx}')" data-toggle="modal" data-target="#myModal">MemberInfoUpdate</button>
 					</td>
 				</tr>
 			</c:forEach>
 			<tr><td colspan="6" class="m-0 p-0"></td></tr>
 		</table>
 	<br/><hr/>
-	<div class="text-center"><a href="${ctp}/" class="btn btn-warning btn-lg">돌아가기</a></div>
+	<div class="text-center"><a href="${ctp}/" class="btn btn-warning btn-lg">back</a></div>
 </div>
 <p><br/></p>
 
@@ -184,7 +184,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title text-center">회원정보수정</h4>
+        <h4 class="modal-title text-center">MemberInfoUpdate</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -195,19 +195,19 @@
 	      		<input type="hidden" name="idx" id="idx" class="form-control mb-3" readonly />
 	      	</div>
 					<div>
-						아이디 <input type="text" name="mid" class="form-control mb-3" />
+						ID <input type="text" name="mid" class="form-control mb-3" />
 					</div>
 					<div>
-						이름 <input type="text" name="name" class="form-control mb-3" />
+						name <input type="text" name="name" class="form-control mb-3" />
 					</div>
 					<div>
-						나이  <input type="number" name="age" class="form-control mb-3" />
+						age  <input type="number" name="age" class="form-control mb-3" />
 					</div>
 					<div>
-						주소 <input type="text" name="address" class="form-control mb-3" />
+						address <input type="text" name="address" class="form-control mb-3" />
 					</div>
 					<div>
-						<input type="button" value="정보수정" onclick="updateCheck()" class="btn btn-dark" />
+						<input type="button" value="infoUpdate" onclick="updateCheck()" class="btn btn-dark" />
 					</div>
 	      </form>
       </div>

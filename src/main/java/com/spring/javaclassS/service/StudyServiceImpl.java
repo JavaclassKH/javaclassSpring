@@ -1,11 +1,22 @@
 package com.spring.javaclassS.service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.javaclassS.common.JavaclassProvide;
 import com.spring.javaclassS.dao.DbtestDAO;
 import com.spring.javaclassS.dao.StudyDAO;
 import com.spring.javaclassS.vo.CrimeVO;
@@ -20,57 +31,64 @@ public class StudyServiceImpl implements StudyService {
 	@Autowired
 	StudyDAO studyDAO;
 	
+	@Autowired
+	JavaclassProvide javaclassProvide;
+	
+
+	@Override
+	public void setSaveCrimeData(CrimeVO vo) {}
+
 	@Override
 	public String[] getCityStringArray(String dodo) {
 		String[] strArray = new String[10];
 		
-		if(dodo.equals("¼­¿ï")) {
-			strArray[0] = "Áß±¸";
-			strArray[1] = "°­³²±¸";
-			strArray[2] = "°­ºÏ±¸";
-			strArray[3] = "°­¼­±¸";
-			strArray[4] = "°­µ¿±¸";
-			strArray[5] = "¼­ÃÊ±¸";
-			strArray[6] = "³ë¿ø±¸";
-			strArray[7] = "°ü¾Ç±¸";
-			strArray[8] = "Á¾·Î±¸";
-			strArray[9] = "¿µµîÆ÷±¸";
+		if(dodo.equals("ï¿½ï¿½ï¿½ï¿½")) {
+			strArray[0] = "ï¿½ß±ï¿½";
+			strArray[1] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[2] = "ï¿½ï¿½ï¿½Ï±ï¿½";
+			strArray[3] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[4] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[5] = "ï¿½ï¿½ï¿½Ê±ï¿½";
+			strArray[6] = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[7] = "ï¿½ï¿½ï¿½Ç±ï¿½";
+			strArray[8] = "ï¿½ï¿½ï¿½Î±ï¿½";
+			strArray[9] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}	
-		else if(dodo.equals("°æ±â")) {
-			strArray[0] = "¼ö¿ø½Ã";
-			strArray[1] = "¿À»ê½Ã";
-			strArray[2] = "¾È¾ç½Ã";
-			strArray[3] = "°úÃµ½Ã";
-			strArray[4] = "¾È¼º½Ã";
-			strArray[5] = "½ÃÈï½Ã";
-			strArray[6] = "ÆòÅÃ½Ã";
-			strArray[7] = "¿ëÀÎ½Ã";
-			strArray[8] = "¼º³²½Ã";
-			strArray[9] = "±¤¸í½Ã";
+		else if(dodo.equals("ï¿½ï¿½ï¿½")) {
+			strArray[0] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[1] = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[2] = "ï¿½È¾ï¿½ï¿½";
+			strArray[3] = "ï¿½ï¿½Ãµï¿½ï¿½";
+			strArray[4] = "ï¿½È¼ï¿½ï¿½ï¿½";
+			strArray[5] = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[6] = "ï¿½ï¿½ï¿½Ã½ï¿½";
+			strArray[7] = "ï¿½ï¿½ï¿½Î½ï¿½";
+			strArray[8] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[9] = "ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}
-		else if(dodo.equals("ÃæºÏ")) {
-			strArray[0] = "Ã»ÁÖ½Ã";
-			strArray[1] = "ÁõÆò±º";
-			strArray[2] = "ÁøÃµ±º";
-			strArray[3] = "¿À¼ÛÀ¾";
-			strArray[4] = "ÃæÁÖ½Ã";
-			strArray[5] = "Á¦Ãµ½Ã";
-			strArray[6] = "´Ü¾ç±º";
-			strArray[7] = "±«»ê±º";
-			strArray[8] = "¿ÁÃµ±º";
-			strArray[9] = "¿µµ¿";
+		else if(dodo.equals("ï¿½ï¿½ï¿½")) {
+			strArray[0] = "Ã»ï¿½Ö½ï¿½";
+			strArray[1] = "ï¿½ï¿½ï¿½ï¿½";
+			strArray[2] = "ï¿½ï¿½Ãµï¿½ï¿½";
+			strArray[3] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[4] = "ï¿½ï¿½ï¿½Ö½ï¿½";
+			strArray[5] = "ï¿½ï¿½Ãµï¿½ï¿½";
+			strArray[6] = "ï¿½Ü¾ç±º";
+			strArray[7] = "ï¿½ï¿½ï¿½ê±º";
+			strArray[8] = "ï¿½ï¿½Ãµï¿½ï¿½";
+			strArray[9] = "ï¿½ï¿½ï¿½ï¿½";
 		}
-		else if(dodo.equals("Ãæ³²")) {
-			strArray[0] = "Ãµ¾È½Ã";
-			strArray[1] = "¾Æ»ê½Ã";
-			strArray[2] = "³í»ê½Ã";
-			strArray[3] = "´çÁø½Ã";
-			strArray[4] = "¼­»ê½Ã";
-			strArray[5] = "È«¼º±º";
-			strArray[6] = "Ã»¾ç±º";
-			strArray[7] = "°è·æ½Ã";
-			strArray[8] = "¿¹»ê±º";
-			strArray[9] = "º¸·É½Ã";
+		else if(dodo.equals("ï¿½æ³²")) {
+			strArray[0] = "Ãµï¿½È½ï¿½";
+			strArray[1] = "ï¿½Æ»ï¿½ï¿½";
+			strArray[2] = "ï¿½ï¿½ï¿½ï¿½";
+			strArray[3] = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[4] = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			strArray[5] = "È«ï¿½ï¿½ï¿½ï¿½";
+			strArray[6] = "Ã»ï¿½ç±º";
+			strArray[7] = "ï¿½ï¿½ï¿½ï¿½";
+			strArray[8] = "ï¿½ï¿½ï¿½ê±º";
+			strArray[9] = "ï¿½ï¿½ï¿½É½ï¿½";
 		}
 		
 	
@@ -82,57 +100,62 @@ public class StudyServiceImpl implements StudyService {
 	public ArrayList<String> getCityArrayList(String dodo) {
 		ArrayList<String> vos = new ArrayList<String>(); 
 		
-		if(dodo.equals("¼­¿ï")) {
-			vos.add("Áß±¸");
-			vos.add("°­³²±¸");
-			vos.add("°­ºÏ±¸");
-			vos.add("°­¼­±¸");
-			vos.add("°­µ¿±¸");
-			vos.add("¼­ÃÊ±¸");
-			vos.add("³ë¿ø±¸");
-			vos.add("°ü¾Ç±¸");
-			vos.add("Á¾·Î±¸");
-			vos.add("¿µµîÆ÷");
+		if(dodo.equals("ï¿½ï¿½ï¿½ï¿½")) {
+			vos.add("ï¿½ß±ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Ï±ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Ê±ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Ç±ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Î±ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}	
-		else if(dodo.equals("°æ±â")) {
+		else if(dodo.equals("ï¿½ï¿½ï¿½")) {
 			
-			vos.add("¼ö¿ø½Ã");
-			vos.add("¿À»ê½Ã");
-			vos.add("¾È¾ç½Ã");
-			vos.add("°úÃµ½Ã");
-			vos.add("¾È¼º½Ã");
-			vos.add("½ÃÈï½Ã");
-			vos.add("ÆòÅÃ½Ã");
-			vos.add("¿ëÀÎ½Ã");
-			vos.add("¼º³²½Ã");
-			vos.add("±¤¸í½Ã");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½È¾ï¿½ï¿½");
+			vos.add("ï¿½ï¿½Ãµï¿½ï¿½");
+			vos.add("ï¿½È¼ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Ã½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Î½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		else if(dodo.equals("ÃæºÏ")) {
-			vos.add("Ã»ÁÖ½Ã");
-			vos.add("ÁõÆò±º");
-			vos.add("ÁøÃµ±º");
-			vos.add("¿À¼ÛÀ¾");
-			vos.add("ÃæÁÖ½Ã");
-			vos.add("Á¦Ãµ½Ã");
-			vos.add("´Ü¾ç±º");
-			vos.add("±«»ê±º");
-			vos.add("¿ÁÃµ±º");
-			vos.add("¿µµ¿");
+		else if(dodo.equals("ï¿½ï¿½ï¿½")) {
+			vos.add("Ã»ï¿½Ö½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½Ãµï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½Ö½ï¿½");
+			vos.add("ï¿½ï¿½Ãµï¿½ï¿½");
+			vos.add("ï¿½Ü¾ç±º");
+			vos.add("ï¿½ï¿½ï¿½ê±º");
+			vos.add("ï¿½ï¿½Ãµï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½");
 		}
-		else if(dodo.equals("Ãæ³²")) {
-			vos.add("Ãµ¾È½Ã");
-			vos.add("¾Æ»ê½Ã");
-			vos.add("³í»ê½Ã");
-			vos.add("´çÁø½Ã");
-			vos.add("¼­»ê½Ã");
-			vos.add("È«¼º±º");
-			vos.add("Ã»¾ç±º");
-			vos.add("°è·æ½Ã");
-			vos.add("¿¹»ê±º");
-			vos.add("º¸·É½Ã");
+		else if(dodo.equals("ï¿½æ³²")) {
+			vos.add("Ãµï¿½È½ï¿½");
+			vos.add("ï¿½Æ»ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ï¿½ï¿½");
+			vos.add("È«ï¿½ï¿½ï¿½ï¿½");
+			vos.add("Ã»ï¿½ç±º");
+			vos.add("ï¿½ï¿½ï¿½ï¿½");
+			vos.add("ï¿½ï¿½ï¿½ê±º");
+			vos.add("ï¿½ï¿½ï¿½É½ï¿½");
 		}
 		
 		return vos;
+	}
+	
+	@Override
+	public void setSaveCrimeDate(CrimeVO vo) {
+		studyDAO.setSaveCrimeDate(vo);
 	}
 
 	@Override
@@ -170,11 +193,89 @@ public class StudyServiceImpl implements StudyService {
 	public List<UserVO> getUserMidList(String mid) {
 		return studyDAO.getUserMidList(mid);
 	}
+	@Override
+	public int fileUpload(MultipartFile fName, String mid) {
+		int res = 0;
+		
+		// íŒŒì¼ì´ë¦„ ì¤‘ë³µì²˜ë¦¬ë¥¼ ìœ„í•´ UUIDê°ì²´ í™œìš©
+		UUID uid = UUID.randomUUID();
+		String oFileName = fName.getOriginalFilename();
+		String sFileName = mid + "_" + uid.toString().substring(0, 8) + "_" + oFileName;
+		
+		// ì„œë²„ì— íŒŒì¼ ì˜¬ë¦¬ê¸°
+		try {
+			writeFile(fName, sFileName);
+			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	private void writeFile(MultipartFile fName, String sFileName) throws IOException {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/fileUpload/");
+		
+		FileOutputStream fos = new FileOutputStream(realPath + sFileName);
+		
+		//fos.write(fName.getBytes());
+		if(fName.getBytes().length != -1) {
+			fos.write(fName.getBytes());
+		}
+		fos.flush();
+		fos.close();
+	}
 
 	@Override
-	public void setSaveCrimeData(CrimeVO vo) {
-		studyDAO.setSaveCrimeData(vo);
+	public int multiFileUpload(MultipartHttpServletRequest mFile) {
+		int res = 0;
+		try {		
+			List<MultipartFile> fileList = mFile.getFiles("fName");
+			String oFileNames = "";
+			String sFileNames = "";
+			int fileSizes = 0;
+			
+			for(MultipartFile file : fileList) {
+				//System.out.println("ì›ë³¸íŒŒì¼ : " + file.getOriginalFilename());
+				String oFileName = file.getOriginalFilename();
+				String sFileName = javaclassProvide.saveFileName(oFileName);
+				
+				javaclassProvide.writeFile(file, sFileName, "fileUpload");
+			
+				oFileNames += oFileName + " / ";
+				sFileNames += sFileName + " / ";
+				fileSizes += file.getSize();
+				
+			}
+			oFileNames = oFileNames.substring(0, oFileNames.length() - 2);
+			sFileNames = sFileNames.substring(0, sFileNames.length() - 2);
+			
+			System.out.println("ì› ë³¸ íŒŒ ì¼ : " + oFileNames);
+			System.out.println("ì € ì¥ íŒŒ ì¼ : " + sFileNames);
+			System.out.println("ì´ ì‚¬ ì´ ì¦ˆ : " + fileSizes);
+			
+			
+			res = 1;				
+		} catch (IOException error) {
+			System.out.println("ë©€í‹°íŒŒì¼ì „ì†¡ì¤‘ì˜¤ë¥˜" + error.getMessage());
+		}
+		
+		return res;
 	}
+
+	@Override
+	public int multiFileUpload(MultipartHttpServletRequest mFile, String[] imgNames) {
+		int res = 0;
+		
+	
+		
+		
+		return res;
+	}
+
+	
+
 
 
 

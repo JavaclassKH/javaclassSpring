@@ -74,42 +74,42 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>회원 리스트</h2>
+  <h2>MemberList</h2>
   <hr/>
   <div class="mb-2">
-	  <input type="button" value="보여" id="btnShow" class="badge badge-success" />
-	  <input type="button" value="가려" id="btnHide" class="badge badge-primary" />
+	  <input type="button" value="show" id="btnShow" class="badge badge-success" />
+	  <input type="button" value="hide" id="btnHide" class="badge badge-primary" />
   </div>
   <div id="userInput">
     <form name="myform" method="post" action="${ctp}/dbtest/dbtestInputOk">
       <table class="table table-bordered text-center">
         <tr>
-          <th>아이디</th>
+          <th>ID</th>
           <td>
           	<div class="input-group">
 	          	<input type="text" name="mid" id="mid" value="atom1234" class="form-control" />
 	          	<div class="input-group-append">
-	          		<input type="button" style="border-radius: 5px;" value="아이디중첵" onclick="idCheck()" class="btn btn-light" />
+	          		<input type="button" style="border-radius: 5px;" value="idCheck" onclick="idCheck()" class="btn btn-light" />
 	          	</div>
           	</div>
           </td>
         </tr>
         <tr>
-          <th>성명</th>
-          <td><input type="text" name="name" value="아톰" class="form-control" /></td>
+          <th>name</th>
+          <td><input type="text" name="name" value="atom" class="form-control" /></td>
         </tr>
         <tr>
-          <th>나이</th>
+          <th>age</th>
           <td><input type="number" name="age" value="20" class="form-control" /></td>
         </tr>
         <tr>
-          <th>주소</th>
+          <th>address</th>
           <td><input type="text" name="address" value="서울" class="form-control" /></td>
         </tr>
         <tr>
           <td colspan="2" class="text-center">
-            <input type="submit" value="회원가입" class="btn btn-success mt-3" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="reset" value="다시입력" class="btn btn-warning mt-3" />
+            <input type="submit" value="join" class="btn btn-success mt-3" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="reset" value="reset" class="btn btn-warning mt-3" />
           </td>
         </tr>
       </table>
@@ -117,12 +117,12 @@
   </div>
   <table class="table table-hover text-center">
     <tr class="table-secondary">
-      <th>번호</th>
-      <th>아이디</th>
-      <th>성명</th>
-      <th>나이</th>
-      <th>주소</th>
-      <th>비고</th>
+      <th>no</th>
+      <th>ID</th>
+      <th>name</th>
+      <th>age</th>
+      <th>address</th>
+      <th>note</th>
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
@@ -132,8 +132,8 @@
         <td>${vo.age}</td>
         <td>${vo.address}</td>
         <td>
-          <a href="javascript:deleteCheck(${vo.idx})" class="badge badge-danger">삭제</a>
-          <a href="javascript:updateCheck(${vo.idx})" id="updateBtn${vo.idx}" class="badge badge-info">수정</a>
+          <a href="javascript:deleteCheck(${vo.idx})" class="badge badge-danger">Delete</a>
+          <a href="javascript:updateCheck(${vo.idx})" id="updateBtn${vo.idx}" class="badge badge-info">Update</a>
         </td>
       </tr>
       <tr class="userRow" id="row${vo.idx}" style="display:none">
@@ -143,7 +143,7 @@
 	        <td><input type="text" name="name" value="${vo.name}" id="name${vo.name}" class="form-control"></td>
 	        <td><input type="number" name="age" value="${vo.age}" id="age${vo.age}" class="form-control"></td>
 	        <td><input type="text" name="address" value="${vo.address}" id="address${vo.address}" class="form-control"></td>
-	        <td><input type="submit" value="수정" class="btn btn-secondary btn-sm"/></td>
+	        <td><input type="submit" value="Update" class="btn btn-secondary btn-sm"/></td>
 	        <input type="hidden" name="idx" value="${vo.idx}" />
 	      </form>
       </tr>
@@ -151,26 +151,26 @@
     <tr><td colspan="6" class="m-0 p-0"></td></tr>
   </table>
   <div class="row">
-  	<div class="col"><a href="${ctp}/" class="btn btn-warning">돌아가기</a></div>
+  	<div class="col"><a href="${ctp}/" class="btn btn-warning">back</a></div>
   	<div class="col text-right">
   	  <div class="input-group">
-  	    <div class="input-group-prepend"><span class="input-group-text">아이디검색</span></div>
-  	    <input type="text" name="idSearch" id="idSearch" placeholder="검색할 아이디를 입력하세요" class="form-control"/>
-  	  	<div class="input-group-append"><button type="button" onclick="idSearch()" class="btn btn-info">검색</button></div>
+  	    <div class="input-group-prepend"><span class="input-group-text">idSearch</span></div>
+  	    <input type="text" name="idSearch" id="idSearch" placeholder="put ID to search" class="form-control"/>
+  	  	<div class="input-group-append"><button type="button" onclick="idSearch()" class="btn btn-info">Search</button></div>
   	  </div>
   	</div>
   </div>
   <br/>
   <c:if test="${!empty searchVos}">
     <hr/>
-    <h4 class="text-center">검색 결과</h4>
+    <h4 class="text-center">Search Result</h4>
     <table class="table table-hover text-center">
       <tr class="table-secondary">
-	      <th>번호</th>
-	      <th>아이디</th>
-	      <th>성명</th>
-	      <th>나이</th>
-	      <th>주소</th>
+	      <th>no</th>
+	      <th>ID</th>
+	      <th>name</th>
+	      <th>age</th>
+	      <th>address</th>
 	    </tr>
 	    <c:forEach var="vo" items="${searchVos}" varStatus="st">
 	      <tr>
@@ -184,7 +184,7 @@
 	    <tr><td colspan="6" class="m-0 p-0"></td></tr>
 	  </table>
     <div class="text-right">
-      <input type="button" value="결과닫기" onclick="location.href='userList';" class="btn btn-success"/>
+      <input type="button" value="close" onclick="location.href='userList';" class="btn btn-success"/>
     </div>
   </c:if>
 </div>

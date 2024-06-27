@@ -20,36 +20,36 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-	<h2>메 일 보 내 기</h2>
-	<p>받는 사람의 메일주소를 정확히 입력해 주세요.</p>
+	<h2>Send Mail</h2>
+	<p>Please enter the recipient's email address accurately.</p>
 	<div>
 		<form name="mf" method="post">
 			<table class="table table-border">
 				<tr>
-					<th>받는사람</th>
+					<th>recipient</th>
 					<td>
 						<div class="input-group">
-							<input type="text" name="toMail" placeholder="받으실 분의 메일 주소를 입력하세요" class="form-control" autofocus required />
+							<input type="text" name="toMail" placeholder="enter the recipient's email address" class="form-control" autofocus required />
 							<div class="input-group-append">
-								<input type="button" value="주소록" onclick="javascript:alert('주소록No');" class="btn btn-info form-control" />
+								<input type="button" value="address book" onclick="javascript:alert('주소록No');" class="btn btn-info form-control" />
 							</div>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<th>메일제목</th>
-					<td><input type="text" name="title" placeholder="제목을 입력하세요" class="form-control" required /></td>
+					<th>Mail Title</th>
+					<td><input type="text" name="title" placeholder="enter title" class="form-control" required /></td>
 				</tr>
 				<tr>
-					<th>메일내용</th>
+					<th>Mail Content</th>
 					<td>
-						<textarea rows="6" name="content" placeholder="메일 내용을 입력하세요" class="form-control" required>메일 내용을 입력하세요</textarea>
+						<textarea rows="6" name="content" placeholder="enter mail content" class="form-control" required></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="보내기" class="btn btn-success form-control mt-2" />
-						<input type="reset" value="다시쓰기" class="btn btn-warning mt-2" />
+						<input type="submit" value="send" class="btn btn-success form-control mt-2" />
+						<input type="reset" value="reset" class="btn btn-warning mt-2" />
 					</td>
 				</tr>
 			</table>

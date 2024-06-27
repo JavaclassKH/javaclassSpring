@@ -3,6 +3,9 @@ package com.spring.javaclassS.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.spring.javaclassS.vo.CrimeVO;
 import com.spring.javaclassS.vo.UserVO;
 
@@ -27,6 +30,14 @@ public interface StudyService {
 	public List<UserVO> getUserMidList(String mid);
 
 	public void setSaveCrimeData(CrimeVO vo);
+
+	public int fileUpload(MultipartFile fName, String mid);
+
+	void setSaveCrimeDate(CrimeVO vo);
+
+	public int multiFileUpload(MultipartHttpServletRequest mFile);
+
+	public int multiFileUpload(MultipartHttpServletRequest mFile, String[] imgNames);
 
 
 

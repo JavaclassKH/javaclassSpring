@@ -132,26 +132,26 @@
 	<h1 style="text-align: center; vertical-align: top;">Here is ajaxForm</h1>
 	<br/><hr/><br/>
 	<div>
-		기본(int -> String -> int -> String) <br/><br/>
-		<a href="javascript:ajaxTest1(10)" class="btn btn-light mr-2 mb-2">값전달1 </a>&nbsp;&nbsp;&nbsp;<span id="demo1"></span>
+		Basic(int -> String -> int -> String) <br/><br/>
+		<a href="javascript:ajaxTest1(10)" class="btn btn-light mr-2 mb-2">valueTransfer1 </a>&nbsp;&nbsp;&nbsp;<span id="demo1"></span>
 	</div><br/>
 	<div>
-		기본(String) <br/><br/>
-		<a href="javascript:ajaxTest2('안농')" class="btn btn-light mr-2 mb-2">값전달2 </a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>
+		Basic(String) <br/><br/>
+		<a href="javascript:ajaxTest2('안농')" class="btn btn-light mr-2 mb-2">valueTransfer2 </a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>
 	</div>
 	<br/><hr/><br/>
 	<div class="mb-2">
-		응용(Array) - 시(도)/구(시,군,동) 출력<br/><br/>
-		<a href="${ctp}/study/ajax/ajaxTest3_1" class="btn btn-primary mr-2">String배열</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
+		Application(Array) - 시(도)/구(시,군,동) print<br/><br/>
+		<a href="${ctp}/study/ajax/ajaxTest3_1" class="btn btn-primary mr-2">StringArray</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
 		<a href="${ctp}/study/ajax/ajaxTest3_2" class="btn btn-secondary mr-2">ArrayList</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
 		<a href="${ctp}/study/ajax/ajaxTest3_3" class="btn btn-dark mr-2">Map</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
-		<a href="${ctp}/study/ajax/ajaxTest3_4" class="btn btn-info mr-2">DB성명으로자료검색</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
+		<a href="${ctp}/study/ajax/ajaxTest3_4" class="btn btn-info mr-2">Search name from DB</a>&nbsp;&nbsp;&nbsp;<span id="demo2"></span>		
 	</div>
 	<br/><hr/><br/>
-	<div> 아이디 : 
+	<div> ID : 
 		<input type="text" name="mid" id="mid" style="border: 1px solid gray; border-radius: 3px;" autofocus />
-		<input type="button" value="아이디완전일치(vo)" onclick="fCheckId1()" class="btn btn-info mr-3" />
-		<input type="button" value="아이디부분일치(vos)" onclick="fCheckId2()" class="btn btn-info mr-3" />
+		<input type="button" value="AllIDmatch(vo)" onclick="fCheckId1()" class="btn btn-info mr-3" />
+		<input type="button" value="partIDmatch(vos)" onclick="fCheckId2()" class="btn btn-info mr-3" />
 	</div><br/>
 	<div id="d3"></div>
 </div>

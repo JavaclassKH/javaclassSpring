@@ -15,4 +15,6 @@ public interface StudyDAO {
 
 	void setSaveCrimeData(@Param("vo") CrimeVO vo);
 
+	void setSaveCrimeDate(CrimeVO vo);
+
 }

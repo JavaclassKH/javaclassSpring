@@ -40,23 +40,23 @@
 <div class="container">
 	<h1 class="text-center"><b>REST API</b></h1>
 	<hr/>
-	<p>사용 예시</p>
-	<div>예시) 브라우저상에 'Hello Sprngframework' 를 출력해 보시오</div>
+	<p>Use example</p>
+	<div>ex) on chrome browser print 'Hello Sprngframework'</div>
 	<div class="mb-3">
-		<a href="${ctp}/study/restapi/restapiTest1/Hello Springframework" class="btn btn-warning mt-2">호출1(X)</a>
-		<a href="${ctp}/restapi/restapiTest2/Hello Springframework" class="btn btn-outline-success mt-2">호출2(O)</a>
-		<a href="${ctp}/restapi/restapiTest3/Hello Springframework" class="btn btn-outline-success mt-2">호출3(O)</a>
+		<a href="${ctp}/study/restapi/restapiTest1/Hello Springframework" class="btn btn-warning mt-2">summon1(X)</a>
+		<a href="${ctp}/restapi/restapiTest2/Hello Springframework" class="btn btn-outline-success mt-2">summon2(O)</a>
+		<a href="${ctp}/restapi/restapiTest3/Hello Springframework" class="btn btn-outline-success mt-2">summon3(O)</a>
 	</div>
 	<hr/><br/>
-	<h3>Fetch를 사용한 JSON자료 호출</h3>
+	<h3>summon JSON to use Fetch</h3>
 	<div class="mb-3">
-		<input type="button" value="fetch연습" onclick="fetchCheck()" class="btn btn-primary" />
+		<input type="button" value="fetchPrac" onclick="fetchCheck()" class="btn btn-primary" />
 	</div>
 	<div><div><div id="d"></div></div></div>
 	<br/><hr/>
 	<hr/><br/>
 	<div class="mb-5">
-		<a href="${ctp}/study/restapi/restapiTest4" class="btn btn-light">String Guilty 발생현황</a>
+		<a href="${ctp}/study/restapi/restapiTest4" class="btn btn-light">String Guilty Occurrence status</a>
 	</div>
 	<br/><hr/>
 	

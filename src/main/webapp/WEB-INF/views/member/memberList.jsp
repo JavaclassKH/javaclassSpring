@@ -35,26 +35,26 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 	<div class="container">
-		<h1 class="text-center mb-2"><b><font size="14em">전&nbsp; 체&nbsp; 회&nbsp; 원&nbsp; 리&nbsp; 스&nbsp; 트&nbsp;</font></b></h1>
+		<h1 class="text-center mb-2"><b><font size="14em">Whole Member List &nbsp;&nbsp;(total: ${fn:length(vos)}EA)</font></b></h1>
 		<c:if test="${sLevel == 0}">
-			<input type="checkbox" name="userInfor" id="userInfor" onclick="userCheck()" /> &nbsp;비공개회원보기
-		</c:if>
+			<input type="checkbox" name="userInfor" id="userInfor" onclick="userCheck()" /> &nbsp;&nbsp;&nbsp;CensoredMember Showing
+		</c:if><br/>
 	<div class="totalList">
 		<div>
 			<table class="table table-hover">
 				<tr class="text-dark table-warning text-center">
-					<th>번호</th>
-					<th>아이디</th>
-					<th>닉네임</th>
-					<th>성명</th>
-					<th>생일</th>
-					<th>성별</th>
-					<th>직업</th>
-					<th>취미</th>			
-					<th>최종방문일</th>	
+					<th>No</th>
+					<th>ID</th>
+					<th>nickName</th>
+					<th>name</th>
+					<th>birthday</th>
+					<th>gender</th>
+					<th>job</th>
+					<th>hobby</th>			
+					<th>lastVisitDate</th>	
 					<c:if test="${sLevel == 0}">		
-					<th>오늘방문횟수</th>		
-					<th>활동현황</th>	
+					<th>todayVisitCount</th>		
+					<th>activityStatus</th>	
 					</c:if>
 				</tr>			
 				<c:forEach var="vo" items="${vos}" varStatus="st">
@@ -72,8 +72,8 @@
 							<c:if test="${sLevel == 0}">
 							<td>${vo.todayCnt}</td>
 							<td>
-								<c:if test="${vo.userDel == 'OK'}"><font color="red"><b>탈퇴신청</b></font></c:if>
-								<c:if test="${vo.userDel != 'OK'}"><b>정상활동</b></c:if>
+								<c:if test="${vo.userDel == 'OK'}"><font color="red"><b>Cancel called</b></font></c:if>
+								<c:if test="${vo.userDel != 'OK'}"><b>Active</b></c:if>
 							</td>
 							</c:if>
 						</tr>
@@ -86,22 +86,21 @@
 			
 			<div id="userDisplay">
 				<c:if test="${sLevel == 0}">
-					<h2 class="text-center mb-4"><b><font size="12em"> 비 공 개 회 원 리 스 트 </font></b></h2>
-					<h3 class="text-center mt-2"><b> 관 리 자 전 용 열 람 리 스 트</b></h3>
+					<h2 class="text-center mb-4"><b><font size="12em"> ConsernedMember List </font></b></h2>
 						<table class="table table-hover">
 							<tr class="text-dark table-danger text-center">
-								<th>번호</th>
-								<th>아이디</th>
-								<th>닉네임</th>
-								<th>성명</th>
-								<th>생일</th>
-								<th>성별</th>
-								<th>직업</th>
-								<th>취미</th>			
-								<th>최종방문일</th>		
-								<c:if test="${sLevel == 0}">	
-								<th>오늘방문횟수</th>			
-								<th>활동현황</th>			
+								<th>No</th>
+								<th>ID</th>
+								<th>nickName</th>
+								<th>name</th>
+								<th>birthday</th>
+								<th>gender</th>
+								<th>job</th>
+								<th>hobby</th>			
+								<th>lastVisitDate</th>	
+								<c:if test="${sLevel == 0}">		
+								<th>todayVisitCount</th>		
+								<th>activityStatus</th>		
 								</c:if>
 							</tr>			
 							<c:forEach var="vo" items="${vos}" varStatus="st">
@@ -119,8 +118,8 @@
 										<c:if test="${sLevel == 0}">
 										<td>${vo.todayCnt}</td>
 										<td>
-											<c:if test="${vo.userDel == 'OK'}"><font color="red"><b>탈퇴신청</b></font></c:if>
-											<c:if test="${vo.userDel != 'OK'}"><b>정상활동</b></c:if>
+											<c:if test="${vo.userDel == 'OK'}"><font color="red"><b>Cancel called</b></font></c:if>
+											<c:if test="${vo.userDel != 'OK'}"><b>Active</b></c:if>
 										</td>
 										</c:if>
 									</tr>

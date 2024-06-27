@@ -96,6 +96,7 @@
 	    	}
    	 }
     
+ 	   	
     // 아이디 중복체크
     function idCheck() {
     	let mid = myform.mid.value;
@@ -165,28 +166,28 @@
 <div class="container">
 <!--   <form name="myform" method="post" class="was-validated" enctype="multipart/form-data"> -->
   <form name="myform" method="post" class="was-validated">
-    <h2>회 원 가 입</h2>
+    <h2>J O I N</h2>
     <br/>
     <div class="form-group">
-      <label for="mid">아이디  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복체크" id="midBtn" class="btn btn-warning btn-sm" onclick="idCheck()"/></label>
-      <input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요." required autofocus/>
+      <label for="mid">ID  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="ID Check" id="midBtn" class="btn btn-warning btn-sm" onclick="idCheck()"/></label>
+      <input type="text" class="form-control" name="mid" id="mid" placeholder="enter ID." required autofocus/>
     </div>
     <div class="form-group">
-      <label for="pwd">비밀번호 </label>
-      <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요." name="pwd" required />
+      <label for="pwd">password </label>
+      <input type="password" class="form-control" id="pwd" placeholder="enter pasword" name="pwd" required />
     </div>
     <div class="form-group">
-      <label for="nickName">닉네임  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="nickNameBtn" value="닉네임 중복체크" class="btn btn-warning btn-sm" onclick="nickCheck()"/></label>
-      <input type="text" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" required />
+      <label for="nickName">nickName  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="nickNameBtn" value="nickNameCheck" class="btn btn-warning btn-sm" onclick="nickCheck()"/></label>
+      <input type="text" class="form-control" id="nickName" placeholder="enter nickName" name="nickName" required />
     </div>
     <div class="form-group">
-      <label for="name">성명 </label>
-      <input type="text" class="form-control" id="name" placeholder="성명을 입력하세요." name="name" required />
+      <label for="name">name </label>
+      <input type="text" class="form-control" id="name" placeholder="enter Name" name="name" required />
     </div>
     <div class="form-group">
       <label for="email1">Email address</label>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Email을 입력하세요." id="email1" name="email1" required />
+          <input type="text" class="form-control" placeholder="enter email" id="email1" name="email1" required />
           <div class="input-group-append">
             <select name="email2" class="custom-select">
               <option value="naver.com" selected>naver.com</option>
@@ -201,7 +202,7 @@
     </div>
     <div class="form-group">
       <div class="form-check-inline">
-        <span class="input-group-text">성별 </span> &nbsp; &nbsp;
+        <span class="input-group-text">gender </span> &nbsp; &nbsp;
         <label class="form-check-label">
           <input type="radio" class="form-check-input" name="gender" value="남자" checked>남자
         </label>
@@ -213,16 +214,16 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="birthday">생일</label>
+      <label for="birthday">birthday</label>
       <input type="date" name="birthday" value="<%=java.time.LocalDate.now() %>" class="form-control"/>
     </div>
     <div class="form-group">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">전화번호 :</span> &nbsp;&nbsp;
+          <span class="input-group-text">tel :</span> &nbsp;&nbsp;
             <select name="tel1" class="custom-select">
               <option value="010" selected>010</option>
-              <option value="02">서울</option>
+              <option value="02">seoul</option>
               <option value="031">경기</option>
               <option value="032">인천</option>
               <option value="041">충남</option>
@@ -240,27 +241,27 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="address">주소</label>
+      <label for="address">address</label>
       <div class="input-group mb-2">
-        <input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" class="form-control">
+        <input type="text" name="postcode" id="sample6_postcode" placeholder="postNo" class="form-control">
         <div class="input-group-append">
-          <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary">
+          <input type="button" onclick="sample6_execDaumPostcode()" value="postNoFind" class="btn btn-secondary">
         </div>
       </div>
-      <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
+      <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="address" class="form-control mb-1">
       <div class="input-group mb-2">
-        <input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
+        <input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="detail address" class="form-control"> &nbsp;&nbsp;
         <div class="input-group-append">
-          <input type="text" name="extraAddress" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
+          <input type="text" name="extraAddress" id="sample6_extraAddress" placeholder="extra" class="form-control">
         </div>
       </div>
     </div>
     <div class="form-group">
       <label for="homepage">Homepage address:</label>
-      <input type="text" class="form-control" name="homePage" value="https://" placeholder="홈페이지를 입력하세요." id="homePage" />
+      <input type="text" class="form-control" name="homePage" value="https://" placeholder="enter homepage" id="homePage" />
     </div>
     <div class="form-group">
-      <label for="name">직업</label>
+      <label for="name">job</label>
       <select class="form-control" id="job" name="job">
         <!-- <option value="">직업선택</option> -->
         <option>카지노환전상</option>
@@ -276,7 +277,7 @@
     </div>
     <div class="form-group">
       <div class="form-check-inline">
-        <span class="input-group-text">취미</span> &nbsp; &nbsp;
+        <span class="input-group-text">hobby</span> &nbsp; &nbsp;
         <label class="form-check-label">
           <input type="checkbox" class="form-check-input" value="등산" name="hobby"/>등산
         </label>
@@ -318,33 +319,34 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="content">자기소개</label>
-      <textarea rows="5" class="form-control" id="content" name="content" placeholder="자기소개를 입력하세요."></textarea>
+      <label for="content">self Introduce</label>
+      <textarea rows="5" class="form-control" id="content" name="content" placeholder="enter selfIntroduce"></textarea>
     </div>
     <div class="form-group">
       <div class="form-check-inline">
-        <span class="input-group-text">정보공개</span>  &nbsp; &nbsp;
+        <span class="input-group-text">InfoOpenClose</span>  &nbsp; &nbsp;
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="공개" checked/>공개
+          <input type="radio" class="form-check-input" name="userInfor" value="공개" checked/>open
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="비공개"/>비공개
+          <input type="radio" class="form-check-input" name="userInfor" value="비공개" />close
         </label>
       </div>
     </div>
     <div  class="form-group">
-      회원 사진(파일용량:2MByte이내) 
-      <input type="file" name="fName" id="file" class="form-control-file border"/>
+      member Photo(file size:Under 2MByte) 
+      <input type="file" name="fName" id="file" class="form-control-file borderless" />
     </div>
-    <button type="button" class="btn btn-success mr-3" onclick="fCheck()">회원가입</button> &nbsp;&nbsp;&nbsp;
-    <button type="reset" class="btn btn-warning mr-3">다시작성</button> &nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-danger" onclick="location.href='${ctp}/member/memberLogin';">로그인</button>
+    <button type="button" class="btn btn-success mr-3" onclick="fCheck()">Join in</button> &nbsp;&nbsp;&nbsp;
+    <button type="reset" class="btn btn-warning mr-3">reset</button> &nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-danger" onclick="location.href='${ctp}/member/memberLogin';">login</button>
     
     <input type="hidden" name="email" />
     <input type="hidden" name="tel" />
     <input type="hidden" name="address" />
+    <input type="hidden" name="fName" />
   </form>
 </div>
 <p><br/></p>
