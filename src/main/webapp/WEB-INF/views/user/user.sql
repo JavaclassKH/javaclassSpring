@@ -3,15 +3,15 @@ create table user (
 	mid varchar(30) not null,
 	name varchar(30) not null,
 	age int default 20,
-	address varchar(15) default '¼­¿ï',
+	address varchar(15) default 'ï¿½ï¿½ï¿½ï¿½',
 	primary key(idx)
 );
 
-insert into user values (default,'admin','°ü¸®ÀÚ',27,'Ã»ÁÖ');
-insert into user values (default,'sona123','¿î¿µÀÚ',32,default);
-insert into user values (default,'hkd1234','È«±æµ¿',default,default);
-insert into user values (default,'kms1234','±è¸»¼÷',default,'ÀÎÃµ');
-insert into user values (default,'lkj1234','ÀÌ±âÀÚ',25,default);
+insert into user values (default,'admin','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',27,'Ã»ï¿½ï¿½');
+insert into user values (default,'sona123','ï¿½î¿µï¿½ï¿½',32,default);
+insert into user values (default,'hkd1234','È«ï¿½æµ¿',default,default);
+insert into user values (default,'kms1234','ï¿½è¸»ï¿½ï¿½',default,'ï¿½ï¿½Ãµ');
+insert into user values (default,'lkj1234','ï¿½Ì±ï¿½ï¿½ï¿½',25,default);
 
 desc user;
 select * from user;
@@ -20,8 +20,12 @@ select year,sum(robbery) as totRobbery,sum(murder) as totMurder,sum(theft)
 as totTheft,sum(violence) as totViolence,
 avg(robbery) as avgRobbery,avg(murder) as avgMurder,avg(theft) 
 as avgTheft,avg(violence) as avgViolence
-from crime where year = 2022 and police like '¼­¿ï%';
+from crime where year = 2022 and police like 'ï¿½ï¿½ï¿½ï¿½%';
 
+create table user2 (
+	mid varchar(4) not null,
+	job varchar(10)
+);
 
 
 

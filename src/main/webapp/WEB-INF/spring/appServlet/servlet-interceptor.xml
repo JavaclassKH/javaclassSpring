@@ -22,6 +22,8 @@
 			<exclude-mapping path="/member/memberIdCheck" />
 			<exclude-mapping path="/member/memberNickCheck" />
 			<exclude-mapping path="/member/memberLogout" />
+			<exclude-mapping path="/member/kakaoLogin" />
+			<exclude-mapping path="/member/kakaoLogout" />
 			<beans:ref bean="level3Interceptor" />
 		</interceptor>
 		<interceptor> <!-- 정회원(준회원은 BoardList만 읽기 가능, 기타 게시판의 기능은 정회원 이상만 가능) -->

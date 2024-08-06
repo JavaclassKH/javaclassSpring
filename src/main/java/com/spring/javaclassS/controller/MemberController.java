@@ -1,5 +1,7 @@
 package com.spring.javaclassS.controller;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -54,6 +56,7 @@ public class MemberController {
 		return "member/memberMain";
 	}
 	
+	// 일반 로그인
 	@RequestMapping(value = "/memberLogin", method = RequestMethod.GET)
 	public String memberLoginGet(HttpServletRequest request) {
 		
@@ -70,14 +73,105 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
+	// 카카오 로그인
+	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
+	public String kakaoLoginGet(HttpServletRequest request, HttpSession session,
+			String accessToken, String nickName , String email) throws MessagingException {
 		
-		@RequestMapping(value = "/memberLogout", method = RequestMethod.GET)
-		public String memberLogoutGet(HttpSession session) {
-			String mid = (String)session.getAttribute("sMid");
-			session.invalidate();
+		// 카카오 로그아웃을 위한 카카오 앱 키를 세션에 저장
+		session.setAttribute("sAccessToken", accessToken);
+		String imsiNick = "";
+		// 카카오로그인을 한 경우 우리 회원인지 먼저 확인한다. (넘어온 이메일을 '@'를 기준으로 잘라 아이디와 분리해서 기존 member2 테이블의 아이디와 비교한다)
+		MemberVO vo = memberService.getMemberNickNameEmailCheck(nickName, email);
+		
+		// 현재 카카오로그인으로 들어온 우리 회원이 아니었다면! 자동으로 우리 회원에 가입처리한다
+		/** 필수입력 : 아이디,비밀번호(임시발급),닉네임,이메일,성명(닉네임으로 대체) */
+		String newMember = "NO";  // 신규회원여부확인 (신규 : "OK" , 기존 : "NO")
+		if(vo == null) {
+			String mid = email.substring(0, email.indexOf("@"));
 			
-			return "redirect:/message/memberLogout?mid="+mid;
+			// 아이디 중복시 가입처리 불가
+			MemberVO vo2 = memberService.getMemberIdCheck(mid);
+			
+			if(vo2 != null) return "redirect:/message/midSameSearch";
+			// 임시비번 발급
+			String pwd = UUID.randomUUID().toString().substring(0,8);
+			session.setAttribute("imsiPwd", pwd);
+			
+			// 임시비번 암호화처리해 DB에 저장
+			String encPwd = passwordEncoder.encode(pwd);
+			memberService.setKakaoMemberInput(mid, encPwd, nickName, email);
+			
+			// 새로 발급된 임시비번 메일로!
+			javaclassProvide.mailSend(email, "임시비밀번호입니다", pwd);
+			
+			// 새로 가입처리된 회원의 정보를 다시 vo에 담아준Dar
+			vo = memberService.getMemberIdCheck(mid);			
+			
+			// 비밀번호가 새로 발급되었을 때 sLogin 세션을 발생시켜주고 memberMain창에 비밀번호 변경 메시지를 지속적으로 뿌려준다
+			session.setAttribute("sLogin", "OK");	
+			
+			newMember = "OK";
 		}
+		
+		// 카카오로그인 인증 된 후 들어오는 코드 
+		
+			// 로그인 인증 완료(session처리, cookie처리, 기타 설정값)
+			
+			// 1) session처리
+			String strLevel = "";
+			if(vo.getLevel() == 0) strLevel = "관리자";
+			else if(vo.getLevel() == 1) strLevel = "우수회원";
+			else if(vo.getLevel() == 2) strLevel = "정회원";
+			else if(vo.getLevel() == 3) strLevel = "준회원";
+			
+			session.setAttribute("sMid", vo.getMid());
+			session.setAttribute("sNickName", vo.getNickName());
+			session.setAttribute("sLevel", vo.getLevel());
+			session.setAttribute("strLevel", strLevel);
+			
+			// 3) 기타 처리(주로 DB에 처리할 것들[방문카운트, 포인트 등])
+			int point = 10;
+			
+			// 방문카운트 
+			memberService.setMemberInfoUpdate(vo.getMid(), point);
+			
+			if(newMember.equals("NO")) return "redirect:/message/memberLoginOk?mid="+vo.getMid();				
+			else return "redirect:/message/memberLoginNewOk?mid="+vo.getMid();						
+	}
+	
+		
+	@RequestMapping(value = "/memberLogout", method = RequestMethod.GET)
+	public String memberLogoutGet(HttpSession session) {
+		String mid = (String)session.getAttribute("sMid");
+		session.invalidate();
+		
+		return "redirect:/message/memberLogout?mid="+mid;
+	}
+	
+	@RequestMapping(value = "/kakaoLogout", method = RequestMethod.GET)
+	public String kakaoLogoutGet(HttpSession session) {
+		String mid = (String)session.getAttribute("sMid");
+		
+		String regURL = "https://kapi.kakao.com/v1/user/unlink";
+		String accessToken = (String) session.getAttribute("sAccessToken");
+		
+		try {
+			URL url = new URL(regURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", " " + accessToken);
+			
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+		} catch (Exception e) {
+			System.out.println("카카오로그아웃오류 : " + e.getMessage());
+		}
+		
+		session.invalidate();
+		
+		return "redirect:/message/kakaoLogout?mid="+mid;
+	}
 		
 	@RequestMapping(value = "/memberLogin", method = RequestMethod.POST)
 	public String memberLoginPost(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response,
@@ -160,6 +254,34 @@ public class MemberController {
 		if(vo != null) return "1";
 		else return "0";
 	}
+	
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
+	public String memberUpdateGet(Model model, HttpSession session) {
+		String mid = (String) session.getAttribute("sMid");
+		MemberVO vo = memberService.getMemberIdCheck(mid);
+		model.addAttribute("vo", vo);
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+	public String memberUpdatePost(MemberVO vo, MultipartFile fName, HttpSession session) {
+		// 닉네임 체크
+		String nickName = (String) session.getAttribute("sNickName");
+		if(memberService.getMemberNickCheck(vo.getNickName()) != null && !nickName.equals(vo.getNickName())) {
+			return "redirect:/message/nickCheckNo";
+		}
+		
+		// 회원 사진 처리(service객체에서 처리후 DB에 저장한다. 원본파일은 noimage.jpg가 아닐경우 삭제한다.)
+		if(fName.getOriginalFilename() != null && !fName.getOriginalFilename().equals("")) vo.setPhoto(memberService.fileUpload(fName, vo.getMid(), vo.getPhoto()));
+		
+		int res = memberService.setMemberUpdateOk(vo);
+		if(res != 0) {
+			session.setAttribute("sNickName", vo.getNickName());
+			return "redirect:/message/memberUpdateOk";
+		}
+		else return "redirect:/message/memberUpdateNo";
+	}
+
 	
 	
 	@RequestMapping(value = "/memberJoin", method = RequestMethod.POST)

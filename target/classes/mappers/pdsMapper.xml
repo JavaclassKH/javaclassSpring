@@ -34,7 +34,9 @@
 
 
 <!-- update -->
-	
+	<update id="setPdsDownNumPlus">
+	  update pds2 set downNum = downNum + 1 where idx = #{idx};
+	</update>
 	
 
 

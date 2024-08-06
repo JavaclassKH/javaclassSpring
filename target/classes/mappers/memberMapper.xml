@@ -10,19 +10,12 @@
 		select * from member2 where nickName = #{nickName};
 	</select>
 	
-<!-- 
 	<select id="getMemberList" resultType="com.spring.javaclassS.vo.MemberVO">
-		<if test="level == 0">
-			select * from member2 order by nickName;
-		</if>
-		<if test="level != 0">
-			select * from member2 where userInfor = '공개' order by nickName;
-		</if>
+		select * from member2 <if test="level != 0">where userInfor = '공개'</if> order by nickName;
 	</select>
--->	
 	
-	<select id="getMemberList" resultType="com.spring.javaclassS.vo.MemberVO">
-			select * from member2 <if test="level != 0">where userInfor = '공개'</if> order by nickName;
+	<select id="getMemberNickNameEmailCheck" resultType="com.spring.javaclassS.vo.MemberVO">
+		select * from member2 where nickName = #{nickName} and email = #{email} limit 1;
 	</select>
 
 <!-- delete -->	
@@ -33,18 +26,30 @@
 		insert into member2 values (default,#{vo.mid},#{vo.pwd},#{vo.nickName},#{vo.name},#{vo.gender},#{vo.birthday},#{vo.tel},#{vo.address},#{vo.email},#{vo.homePage},#{vo.job},#{vo.hobby},#{vo.photo},#{vo.content},#{vo.userInfor},default,default,default,default,default,default,default);
 	</insert>
 	
-<!-- update -->	
-	<update id="setMemberPasswordUpdate">
-		update member2 set pwd = #{imsipwd} where mid = #{mid};
-	</update>
+	<insert id="setKakaoMemberInput">
+		insert into member2 (mid, pwd, name, nickName, email) values (#{mid},#{encPwd},#{nickName},#{nickName},#{email});
+	</insert>
 	
-	<update id="setMemberInfoUpdate">
-		update member2 set visitCnt = visitCnt + 1, lastDate = now(), todayCnt = todayCnt + 1, point = #{point} where mid = #{mid};
-	</update>
+<!-- update -->	
 	
 	<update id="setPwdChangeOk">
 		update member2 set pwd = #{pwd} where mid = #{mid};
 	</update>
+	
+	<update id="setMemberPasswordUpdate">
+	  update member2 set pwd = #{pwd} where mid = #{mid};
+	</update>
+	
+	<update id="setMemberInfoUpdate">
+	  update member2 set visitCnt=visitCnt+1, lastDate=now(), todayCnt=todayCnt+1, point=#{point} where mid=#{mid};
+	</update>
+  <update id="setMemberUpdateOk">
+    update member2 set nickName=#{vo.nickName},name=#{vo.name},gender=#{vo.gender},birthday=#{vo.birthday},tel=#{vo.tel},address=#{vo.address},email=#{vo.email},homePage=#{vo.homePage},job=#{vo.job},hobby=#{vo.hobby},photo=#{vo.photo},content=#{vo.content},userInfor=#{vo.userInfor} where mid=#{vo.mid};
+  </update>
+  
+  <update id="setUserDel">
+    update member2 set userDel = 'OK' where mid = #{mid};
+  </update>
 	
 
 </mapper>

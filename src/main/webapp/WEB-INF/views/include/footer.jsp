@@ -10,7 +10,11 @@
 	<i class="fa fa-pinterest-p w3-hover-opacity"></i> &nbsp;&nbsp;
 	<i class="fa fa-twitter w3-hover-opacity"></i> &nbsp;&nbsp;
 	<i class="fa fa-linkedin w3-hover-opacity"></i> &nbsp;&nbsp; <br/>
-	<p class="w3-medium">Powered by <a href="${ctp}/">NMIXX</a></p>
+	<p class="w3-medium">Powered by <a href="${ctp}/">NMIXX</a></p> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<p class="text-center text-primary">
+		<%= request.getSession().getServletContext().getRealPath("/") %>
+	</p>
 </footer>
 	
 

@@ -22,7 +22,7 @@ public class DbtestController {
 	@Autowired
 	DbtestService dbtestService;
 	
-	// È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/dbtestList", method = RequestMethod.GET)
 	public String dbtestListGet(Model model) {
 		
@@ -32,7 +32,7 @@ public class DbtestController {
 		return "user/dbtestList";		
 	}
 	
-	// È¸¿øÁ¤º¸ °Ë»ö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	@RequestMapping(value = "/dbtestSearch/{mid}", method = RequestMethod.GET)
 	public String dbtestSearchGet(Model model, @PathVariable String mid) {
 		
@@ -44,17 +44,18 @@ public class DbtestController {
 		return "user/dbtestList";		
 	}
 	
-	// È¸¿øÁ¤º¸ »èÁ¦
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/dbtestDelete", method = RequestMethod.GET)
-	public String dbtestDeleteGet(@RequestParam int idx) {
+	public String dbtestDeleteGet(@RequestParam int idx, 
+		@RequestParam(name = "tempFlag", defaultValue = "", required = false) String tempFlag) {
 		int res = dbtestService.setDbtestDelete(idx); 
 		
-		if(res != 0) return "redirect:/message/dbtestDeleteOk";		
+		if(res != 0) return "redirect:/message/dbtestDeleteOk?tempFlag="+tempFlag;		
 		else return "redirect:/message/dbtestDeleteNo";		
 
 	}
 	
-	// È¸¿øÁ¤º¸ ÀÔ·Â(È¸¿ø°¡ÀÔ)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½(È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping(value = "/dbtestInputOk", method = RequestMethod.POST)
 	public String dbtestInputOkPost(UserVO vo) {
 		
@@ -67,7 +68,7 @@ public class DbtestController {
 		
 	}
 	
-	// È¸¿øÁ¤º¸ »èÁ¦
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/dbtestUpdateOk", method = RequestMethod.POST)
 	public String dbtestUpdateOkPost(UserVO vo) {
 		int res = dbtestService.setdbtestUpdateOk(vo); 
@@ -77,7 +78,7 @@ public class DbtestController {
 		
 	}
 	
-	// ¾ÆÀÌµð Áßº¹Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	@RequestMapping(value = "/dbtestIdCheck", method = RequestMethod.GET)
 	public String getdbtestIdCheckPost(Model model, @RequestParam String mid) {
 		UserVO vo = dbtestService.getDbtestIdCheck(mid);

@@ -15,6 +15,9 @@
 		.mySlides {
 			display: none;
 		}
+		
+		
+				
 	</style>	
 </head>
 <body>

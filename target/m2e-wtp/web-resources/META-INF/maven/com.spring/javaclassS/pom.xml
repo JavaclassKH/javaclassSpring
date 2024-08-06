@@ -215,8 +215,99 @@
 		  <artifactId>commons-fileupload</artifactId>
 		  <version>1.5</version>
 		</dependency>
+		
+		<!-- Web crawling을 하기 위한 라이브러리(2개) [jsoup / selenium] -->
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+		  <groupId>org.jsoup</groupId>
+		  <artifactId>jsoup</artifactId>
+		  <version>1.17.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+		  <groupId>org.seleniumhq.selenium</groupId>
+		  <artifactId>selenium-java</artifactId>
+		  <version>4.18.1</version>
+		</dependency>
+		
+		<!-- WordCloud 사용을 위한 형태소 분석 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.kennycason/kumo-core -->
+		<dependency>
+		  <groupId>com.kennycason</groupId>
+		  <artifactId>kumo-core</artifactId>
+		  <version>1.13</version>
+		</dependency>
+		
+		<!-- CAPTCHA 사용을 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		  <version>3.12.0</version>
+		</dependency>
+		
+		<!-- QR Code 생성을 위한 구글 라이브러리 (zxing) -->
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+		<dependency>
+		  <groupId>com.google.zxing</groupId>
+		  <artifactId>javase</artifactId>
+		  <version>3.5.1</version>
+		</dependency>
+		
+		<!-- BackEnd Check를 위한 Validator 라이브러리 (데이터의 유효성 검사) -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
+	    <groupId>org.hibernate.validator</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>7.0.5.Final</version>
+		</dependency>
+		
+		<!-- Transaction 사용을 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-tx</artifactId>
+	    <version>${org.springframework-version}</version>
+		</dependency>
+
+		<!--  WebSocket(Spring WebSocket)을 사용하기위한 라이브러리 주입하기(2개)  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+		
+		<!-- 스케줄러를 사용하기위한 라이브러리 주입하기 (3개) -->
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+	    <groupId>org.quartz-scheduler</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>2.3.2</version>
+		</dependency>
 				
-	
+		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+		<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP-java7 -->
+		<dependency>
+	    <groupId>com.zaxxer</groupId>
+	    <artifactId>HikariCP-java7</artifactId>
+	    <version>2.4.13</version>
+		</dependency>
+		
+		
+		
 		
 	</dependencies>
 	

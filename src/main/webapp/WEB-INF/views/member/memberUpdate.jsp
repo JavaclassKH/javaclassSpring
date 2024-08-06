@@ -65,7 +65,7 @@
     	}
     	else {
 	    	$.ajax({
-					url : "${ctp}/MemberIdCheck.mem",
+					url : "${ctp}/member/memberIdCheck",
 					type : "get",
 					data : { nickName : nickName },
 					success : function(res) {
@@ -92,7 +92,7 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-  <form name="myform" method="post" action="${ctp}/MemberUpdateOk.mem" class="was-validated">
+  <form name="myform" method="post" class="was-validated">
     <h2><b>회&nbsp;&nbsp; 원&nbsp;&nbsp; 정&nbsp;&nbsp; 보&nbsp;&nbsp; 수&nbsp;&nbsp; 정&nbsp;&nbsp;</b></h2>
     <br/>
     <div class="form-group">

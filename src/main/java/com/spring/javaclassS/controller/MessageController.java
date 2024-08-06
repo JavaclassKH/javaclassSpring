@@ -12,7 +12,8 @@ public class MessageController {
 
 	@RequestMapping(value = "/message/{msgFlag}", method = RequestMethod.GET)
 	public String getMessage(Model model,
-			@PathVariable String msgFlag,
+			@PathVariable String msgFlag, 
+			@RequestParam(name="tempFlag", defaultValue = "", required = false) String tempFlag,
 			@RequestParam(name="mid", defaultValue = "", required = false) String mid,
 			@RequestParam(name="idx", defaultValue = "0", required = false) int idx,
 			@RequestParam(name="pag", defaultValue = "1", required = false) int pag,
@@ -43,9 +44,12 @@ public class MessageController {
 			model.addAttribute("msg", "ȸ�� ���� ���� ����!");
 			model.addAttribute("url", "/user/userList");
 		}
-		else if(msgFlag.equals("dbtestDeleteOk")) {
+		else if(msgFlag.equals("dbtestDeleteOk")) {			
 			model.addAttribute("msg", "ȸ�� ���� ���� ����!");
-			model.addAttribute("url", "/dbtest/dbtestList");
+			
+			if(tempFlag.equals("validator")) model.addAttribute("url", "study/validator/validatorForm");
+			else if(tempFlag.equals("transaction")) model.addAttribute("url", "study/transaction/transactionForm");
+			else model.addAttribute("url", "dbtest/dbtestList");
 		}
 		else if(msgFlag.equals("dbtestDeleteNo")) {
 			model.addAttribute("msg", "ȸ�� ���� ���� ����!");
@@ -121,12 +125,20 @@ public class MessageController {
 			model.addAttribute("msg", mid+"님 로그인하셨습니다");
 			model.addAttribute("url", "member/memberMain");
 		}
+		else if(msgFlag.equals("memberLoginNewOk")) {
+			model.addAttribute("msg", mid+"님 첫 로그인을 환영합니다!\\n발급된 신규 비밀번호를 통해 회원정보를 변경해주세요!");
+			model.addAttribute("url", "member/memberMain");
+		}
 		else if(msgFlag.equals("memberLoginNo")) {
-			model.addAttribute("msg", "로그인에 실패하였습니다\n입력하신 정보를 확인해주세요");
+			model.addAttribute("msg", "로그인에 실패하였습니다\\n입력하신 정보를 확인해주세요");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("memberLogout")) {
 			model.addAttribute("msg", mid+" 님 로그아웃 되었습니다!");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		else if(msgFlag.equals("kakaoLogout")) {
+			model.addAttribute("msg", mid+" 님 로그아웃 되었습니다!(from. kakao)");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("fileUploadOk")) {
@@ -192,6 +204,25 @@ public class MessageController {
 		else if(msgFlag.equals("pdsUploadNo")) {
 			model.addAttribute("msg", "Pds insert failure");
 			model.addAttribute("url", "pds/pdsInput");
+		}
+		else if(msgFlag.equals("midSameSearch")) {
+			model.addAttribute("msg", "이미 사용중인 아이디가 존재합니다\n아이디 확인 후 재로그인해주세");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		else if(msgFlag.equals("transactionUserInputOk")) {
+			model.addAttribute("msg", "User Table에 회원 등록됨!");
+			if(tempFlag.equals("validator")) {
+				model.addAttribute("msg", "User Table에 회원 등록됨!");
+				model.addAttribute("url", "study/validator/validatorForm");
+			}
+			else if(tempFlag.equals("transaction")) {
+				model.addAttribute("msg", "User Table에 회원 등록됨!");
+				model.addAttribute("url", "study/transaction/transactionForm");
+			}
+		}
+		else if(msgFlag.equals("transactionUserInputNo")) {
+			model.addAttribute("msg", "User Table에 회원 등록 Nope..!");
+			model.addAttribute("url", "study/validator/validatorForm");
 		}
 
 		

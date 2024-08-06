@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS.dao.MemberDAO;
 import com.spring.javaclassS.vo.MemberVO;
@@ -48,6 +49,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<MemberVO> getMemberList(int level) {
 		return memberDAO.getMemberList(level);
+	}
+
+	@Override
+	public MemberVO getMemberNickNameEmailCheck(String nickName, String email) {
+		return memberDAO.getMemberNickNameEmailCheck(nickName, email);
+	}
+
+	@Override
+	public void setKakaoMemberInput(String mid, String encPwd, String nickName, String email) {
+		memberDAO.setKakaoMemberInput(mid,encPwd,nickName,email);
+	}
+
+	@Override
+	public int setMemberUpdateOk(MemberVO vo) {
+		return memberDAO.setMemberUpdateOk(vo);
+	}
+
+	@Override
+	public String fileUpload(MultipartFile fName, String mid, String photo) {
+		return memberDAO.fileUpload(fName,mid,photo);
 	}
 	
 	

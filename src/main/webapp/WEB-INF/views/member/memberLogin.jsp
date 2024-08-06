@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>memberLogin.jsp</title>
 	<jsp:include page="/WEB-INF/views/include/bs4.jsp" />
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<style>
 		table {
 			border-radius: 3px;
@@ -62,6 +63,30 @@
 		
 	}
 	
+	// 카카오 로그인(javascript 앱 키 등록)!
+	window.Kakao.init("81a8989e7cb4ef49ef24ef39b4eafb5b"); 
+
+	function kakaoLogin() {
+		window.Kakao.Auth.login({
+			scope: 'profile_nickname, account_email',
+			success:function(autoObj){
+				console.log(Kakao.Auth.getAccessToken());
+				window.Kakao.API.request({
+					url : '/v2/user/me', 
+					success:function(res){
+						const kakao_account = res.kakao_account;
+						console.log(kakao_account);		
+						location.href = '${ctp}/member/kakaoLogin?nickName='+kakao_account.profile.nickname+'&email='+kakao_account.email+'&accessToken='+Kakao.Auth.getAccessToken();
+					}
+				});
+			}
+		});
+	}
+	
+	
+	
+	
+	
 </script>
 </head>
 <body>
@@ -86,7 +111,8 @@
         <td colspan="2">
           <input type="submit" value="login" class="btn btn-outline-success mr-2"/>
           <input type="reset" value="reset" class="btn btn-outline-warning mr-2"/>
-          <input type="button" value="join" onclick="location.href='${ctp}/member/memberJoin';" class="btn btn-primary mr-2"/>
+          <input type="button" value="join" onclick="location.href='${ctp}/member/memberJoin';" class="btn btn-primary mr-6"/>
+          <a href="javascript:kakaoLogin()" class="ml-4"><img src="${ctp}/images/kakao_login_medium_narrow.png" height="35.75px" /></a>
         </td>
       </tr>
     </table>

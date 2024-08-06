@@ -19,6 +19,8 @@ public interface PdsService {
 
 	public PdsVO getPdsContent(int idx);
 
+	public String setPdsDownNumPlus(int idx);
+
 
 
 }

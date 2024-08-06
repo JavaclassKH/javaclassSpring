@@ -18,5 +18,7 @@ public interface PdsDAO {
 
 	public PdsVO getPdsContent(@Param("idx") int idx);
 
+	public String setPdsDownNumPlus(@Param("idx") int idx);
+
 
 }

@@ -1,6 +1,5 @@
 package com.spring.javaclassS.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	// user ¸®½ºÆ®
+	// user ï¿½ï¿½ï¿½ï¿½Æ®
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
 	public String getUserList(Model model) {
 		
@@ -32,7 +31,7 @@ public class UserController {
 		return "user/userList";
 	}
 	
-	// user 1°Ç »èÁ¦Ã³¸®
+	// user 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String getUserDelete(int idx) {
 		int res = userService.setUserDelete(idx);
@@ -40,7 +39,7 @@ public class UserController {
 		else return "redirect:/message/userDeleteNo";
 	}
 	
-	// userÁ¤º¸ µî·ÏÃ³¸®
+	// userï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 	@RequestMapping(value = "/userInputOk", method = RequestMethod.POST)
 	public String getUserInputOk(UserVO vo) {
 		int res = userService.setUserInputOk(vo);
@@ -48,7 +47,7 @@ public class UserController {
 		else return "redirect:/message/userInputNo";
 	}
 	
-	// midÅëÇØ À¯Àú Á¤º¸ °Ë»ö
+	// midï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	@RequestMapping(value = "/userSearch", method = RequestMethod.GET)
 	public String getUserSearch(Model model, @RequestParam String mid) {
 		System.out.println("mid : " + mid);

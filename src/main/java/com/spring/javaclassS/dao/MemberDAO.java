@@ -3,6 +3,7 @@ package com.spring.javaclassS.dao;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS.vo.MemberVO;
 
@@ -21,5 +22,13 @@ public interface MemberDAO {
 	public int setPwdChangeOk(@Param("mid") String mid,@Param("pwd") String pwd);
 
 	public ArrayList<MemberVO> getMemberList(@Param("level") int level);
+
+	public MemberVO getMemberNickNameEmailCheck(@Param("nickName") String nickName,@Param("email") String email);
+
+	public void setKakaoMemberInput(@Param("mid") String mid,@Param("encPwd") String encPwd,@Param("nickName") String nickName,@Param("email") String email);
+
+	public int setMemberUpdateOk(@Param("vo") MemberVO vo);
+
+	public String fileUpload(@Param("fName") MultipartFile fName,@Param("mid") String mid,@Param("photo") String photo);
 
 }
